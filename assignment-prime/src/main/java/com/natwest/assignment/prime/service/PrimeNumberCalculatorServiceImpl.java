@@ -32,35 +32,34 @@ public class PrimeNumberCalculatorServiceImpl implements PrimeNumberCalculatorSe
 	@Override
 	public List<Integer> getPrimeNumbers(final int value, final String algoName) throws PrimeNumberServiceException {
 
+		final PrimeNumberAlgo algo;
+		if (StringUtils.isEmpty(algoName)) {
+			algo = algoTypes.get(PrimeNumberAlgo.AlgoTypes.ONE);
+		} else {
+
+			Optional<PrimeNumberAlgo.AlgoTypes> algoType = Arrays.stream(PrimeNumberAlgo.AlgoTypes.values())
+					.filter(element -> element.name().equalsIgnoreCase(algoName)).findAny();
+
+			if (!algoType.isPresent()) {
+
+				throw new PrimeNumberServiceException(
+						resourceBundle.getMessage("PRIME_NUMBER_ALGO_NOT_FOUND", algoName));
+
+			}
+			algo = algoTypes.get(algoType.get());
+		}
+
 		final PrimeNumberModel fromCache = primeNumbersDao.get(value);
 
 		if (fromCache != null) {
 			return fromCache.getPrimeNumbers();
 		} else {
-			final PrimeNumberAlgo algo;
-			if (StringUtils.isEmpty(algoName)) {
-				algo = algoTypes.get(PrimeNumberAlgo.AlgoTypes.ONE);
-			} else {
-
-				Optional<PrimeNumberAlgo.AlgoTypes> algoType = Arrays.stream(PrimeNumberAlgo.AlgoTypes.values())
-						.filter(element -> element.name().equalsIgnoreCase(algoName)).findAny();
-
-				if (!algoType.isPresent()) {
-
-					throw new PrimeNumberServiceException(
-							resourceBundle.getMessage("PRIME_NUMBER_ALGO_NOT_FOUND", algoName));
-
-				}
-
-				algo = algoTypes.get(algoType.get());
-			}
 
 			final PrimeNumberModel savePrimes = new PrimeNumberModel(value, algo.calculatePrimes(value));
 
 			primeNumbersDao.save(savePrimes);
 
 			return savePrimes.getPrimeNumbers();
-
 		}
 
 	}
