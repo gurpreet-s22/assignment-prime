@@ -20,7 +20,7 @@
 - JSON response
   - {"initial":10,"primes":[2,3,5,7]}
 - XML response
-  - <PrimeNumbers><initial>10</initial><primes><primes>2</primes><primes>3</primes><primes>5</primes><primes>7</primes></primes></PrimeNumbers> 
+  - ```<PrimeNumbers><initial>10</initial><primes><primes>2</primes><primes>3</primes><primes>5</primes><primes>7</primes></primes></PrimeNumbers> ```
 - Error handling
   - if the request parameter "algo" is invalid value which is not supported by the application. Example "localhost:8080/assignment/primes/11?algo=anything"
     - {"errorMessage":"Prime numbers algo does not exists with name anything"} 
