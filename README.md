@@ -6,21 +6,13 @@
 - Run as Spring Boot application which has embedded tomcat server. Run "MainApplication.java"
 - or deploy in an container Server as war
 
-### configure
+### Configure
 - By default the application will run on locahost port: 8080. It can be changed "server.port" in Application.properties. Note: This change is applicable only for embedded tomcat server port.
 
-### configure
+### Features
 - Supports JSON (default) and XML response type. Pass Accept: application/xml or Accept: application/json in request header. 
 - Support multiple algorithms for prime number.  Algo can be switched by passing request parameter as "?algo=one" or "?algo=two". If "algo" request parameter is not passed then by default the algo is "one".
 - Application caches prime numbers in LRU cache which has max capacity to hold 10 entries. If prime numbers are already calculated for a given input value then it is a cache hit or else cache miss. In case of cache miss, the application will calculate the prime numbers for a given input value.
-- 
-
-
-Consider supporting varying return content types such as XML based, that should be configurable using the requested media type.
-
-Consider ways to improve overall performance e.g. caching results, concurrent algorithm
-
-Consider supporting multiple algorithms that can be switched based on optional parameters
 
 ### Rest API
 - Send a GET request "localhost:8080/assignment/primes/10"
