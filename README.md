@@ -3,8 +3,8 @@
 ### Application developed in Spring Boot (3.2.0), Java 17, Maven, Junit 5
 
 ### How to run the application
-- Run as Spring Boot application which has embedded Tomcat server. Run ```MainApplication.java```
-- or deploy in an container Server as war
+- Run as Spring Boot application which has embedded Tomcat server. Run ```com.assignment.prime.MainApplication.java```
+- or deploy in an container Server as war. Run Maven install to create war.
 
 ### Configure
 - By default the Spring Boot Application will run on locahost port: ```8080```. It can be changed ```server.port``` in ```Application.properties```. **Note:** This change is applicable only for embedded Spring Boot Tomcat server port.
